@@ -1,6 +1,7 @@
 spec:
   template:
     spec:
+      serviceAccountName: service-app
       containers:
         - env:
             - name: POSTGRESQL_USER

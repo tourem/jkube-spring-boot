@@ -49,3 +49,7 @@ Once the goal starts up the spring boot RemoteSpringApplication it will watch fo
 e.g. if you edit the java code of your app and then build it via something like this:
 
 > mvn package
+
+
+# Si vous ajoutez le répertoire raw, le watch ne pourra pas marcher :
+> An error has occurred while while trying to watch the resources: Multiple selectors found for the given entities:

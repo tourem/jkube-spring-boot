@@ -16,6 +16,6 @@ public class RandomNumberEndpoint {
     }
 
     protected static RandomNumberEndpointResponse getRandomMessage() {
-        return new RandomNumberEndpointResponse(UUID.randomUUID() +" gggggg ----- test");
+        return new RandomNumberEndpointResponse(UUID.randomUUID() +" ----- random uuid value");
     }
 }

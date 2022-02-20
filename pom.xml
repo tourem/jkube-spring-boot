@@ -65,9 +65,6 @@
                 <artifactId>kubernetes-maven-plugin</artifactId>
                 <version>${jkube.version}</version>
                 <configuration>
-                    <resources>
-                        <serviceAccount>service-app</serviceAccount>
-                    </resources>
                     <images>
                         <image>
                             <name>spring-boot-jkube-simple</name>
