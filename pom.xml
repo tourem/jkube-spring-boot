@@ -89,7 +89,28 @@
             </plugin>
 
         </plugins>
+       
     </build>
-
+    <profiles>
+             <profile>
+			<id>jkube</id>
+			<properties>
+				<rootDockerdir>maven/</rootDockerdir>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<excludes>
+								<exclude>com/poc/api/conf/MongoInMemoryConfig.java</exclude>
+							</excludes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+         </profiles>
 
 </project>
