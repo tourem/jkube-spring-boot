@@ -26,6 +26,8 @@
         <jkube.version>1.6.0</jkube.version>
         <jkube.enricher.jkube-service.type>NodePort</jkube.enricher.jkube-service.type>
         <jkube.generator.name>docker.io/${docker.user}/random-generator:${project.version}</jkube.generator.name>
+	    	<project.source.encoding>UTF-8</project.source.encoding>
+		<rootDockerdir/>
     </properties>
 
     <dependencies>
@@ -87,7 +89,39 @@
                     </execution>
                 </executions>
             </plugin>
-
+           <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<encoding>${project.source.encoding}</encoding>
+					<delimiters>
+						<delimiter>@*@</delimiter>
+					</delimiters>
+				</configuration>
+				<executions>
+					<execution>
+						<id>copy docker</id>
+						<!-- here the phase you need -->
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/docker
+							</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/docker</directory>
+									<filtering>true</filtering>
+									<includes>
+										<include>Dockerfile</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
         </plugins>
        
     </build>
