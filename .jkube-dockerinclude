@@ -1,0 +1,4 @@
+target/*.jar
+entrypoint.sh
+certificat.crt
+config/external-config.yaml
