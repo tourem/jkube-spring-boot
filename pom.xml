@@ -62,33 +62,35 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>org.eclipse.jkube</groupId>
-                <artifactId>kubernetes-maven-plugin</artifactId>
-                <version>${jkube.version}</version>
-                <configuration>
-                    <resources>
-                        <serviceAccount>service-app</serviceAccount>
-                    </resources>
-                    <images>
-                        <image>
-                            <name>spring-boot-jkube-simple</name>
-                            <build>
-                                <contextDir>${project.basedir}/</contextDir>
-                                <dockerFile>Dockerfile</dockerFile>
-                            </build>
-                        </image>
-                    </images>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>resource</goal>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+          	<plugin>
+				<groupId>org.eclipse.jkube</groupId>
+				<artifactId>kubernetes-maven-plugin</artifactId>
+				<version>${jkube.version}</version>
+				<configuration>
+					<images>
+						<image>
+							<name>poc-mongo-jkube</name>
+							<build>
+								<contextDir>${project.basedir}</contextDir>
+								<dockerFile>target/docker/Dockerfile</dockerFile>
+							</build>
+						</image>
+					</images>
+					<enricher>
+						<config>
+							<jkube-service>
+								<name>poc-local-mongo</name>
+								<port>8080:8080</port>
+								<type>NodePort</type>
+							</jkube-service>
+						</config>
+					</enricher>
+					<access>
+						<namespace>default</namespace>
+					</access>
+				</configuration>
+
+			</plugin>
            <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
