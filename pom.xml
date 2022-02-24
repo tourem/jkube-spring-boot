@@ -67,28 +67,37 @@
 				<artifactId>kubernetes-maven-plugin</artifactId>
 				<version>${jkube.version}</version>
 				<configuration>
-					<images>
-						<image>
-							<name>poc-mongo-jkube</name>
-							<build>
-								<contextDir>${project.basedir}</contextDir>
-								<dockerFile>target/docker/Dockerfile</dockerFile>
-							</build>
-						</image>
-					</images>
-					<enricher>
-						<config>
-							<jkube-service>
-								<name>poc-local-mongo</name>
-								<port>8080:8080</port>
-								<type>NodePort</type>
-							</jkube-service>
-						</config>
-					</enricher>
-					<access>
-						<namespace>default</namespace>
-					</access>
-				</configuration>
+							<images>
+								<image>
+									<name>${project.build.finalName}:${project.version}${docker.image.qualifier}</name>
+									<build>
+										<contextDir>${project.basedir}</contextDir>
+										<dockerFile>target/docker/Dockerfile</dockerFile>
+									</build>
+								</image>
+							</images>
+							<enricher>
+								<config>
+									<jkube-service>
+										<name>poc-local-pg</name>
+										<port>8080:8080</port>
+										<type>NodePort</type>
+									</jkube-service>
+								</config>
+							</enricher>
+							<access>
+								<namespace>default</namespace>
+							</access>
+						</configuration>
+						<executions>
+							<execution>
+								<id>build-image</id>
+								<phase>install</phase>
+								<goals>
+									<goal>build</goal>
+								</goals>
+							</execution>
+						</executions>
 
 			</plugin>
            <plugin>
